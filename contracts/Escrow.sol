@@ -5,12 +5,14 @@ contract Escrow {
 	address public arbiter;
 	address public beneficiary;
 	address public depositor;
+	string public note;
 
 	bool public isApproved;
 
-	constructor(address _arbiter, address _beneficiary) payable {
+	constructor(address _arbiter, address _beneficiary, string memory _note) payable {
 		arbiter = _arbiter;
 		beneficiary = _beneficiary;
+		note = _note;
 		depositor = msg.sender;
 	}
 
@@ -24,4 +26,10 @@ contract Escrow {
 		emit Approved(balance);
 		isApproved = true;
 	}
+
+	// * receive function
+    receive() external payable {}
+
+    // * fallback function
+    fallback() external payable {}
 }
